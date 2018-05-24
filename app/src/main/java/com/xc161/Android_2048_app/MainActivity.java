@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("my2048", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         max = findViewById(R.id.max_score);
-        max.setText("最高分：" + sharedPreferences.getString("max", "0"));
+        max.setText("最高分：" + sharedPreferences.getInt("max", 0));
         Button button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override

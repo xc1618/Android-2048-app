@@ -1,6 +1,11 @@
 package com.xc161.Android_2048_app;
 
 import android.content.Context;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
+import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.GestureDetector;
@@ -21,6 +26,7 @@ public class my2048 extends RelativeLayout {
     private boolean isMoveHappen = true;
     private boolean isMergeHappen = true;
     private boolean once;
+    private play_music music_handle;
 
     public interface OnGameListener {
         void OnScoreChange(int score);
@@ -41,6 +47,8 @@ public class my2048 extends RelativeLayout {
 
     public my2048(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        music_handle = new play_music();
+        initmusic();
         margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, margin, getResources().getDisplayMetrics());
         pading = min(getPaddingLeft(), getPaddingRight(), getPaddingTop(), getPaddingBottom());
         gestureDetector = new GestureDetector(context, new MyGestureDetector());
@@ -119,6 +127,11 @@ public class my2048 extends RelativeLayout {
         }
         if (!isFull()) {
             if (isMergeHappen || isMoveHappen) {
+                if (!isMergeHappen) {
+                    playmusic(true);
+                } else {
+                    playmusic(false);
+                }
                 Random random = new Random();
                 int next = random.nextInt(25);
                 Item_for_2048 item = items[next];
@@ -130,6 +143,34 @@ public class my2048 extends RelativeLayout {
                 isMergeHappen = isMoveHappen = false;
             }
         }
+    }
+
+    //初始化音效
+
+    public void initmusic() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Message message = music_handle.obtainMessage(0x001, getContext());
+                message.sendToTarget();
+            }
+        }).start();
+    }
+
+    //播放音效
+    public void playmusic(final boolean which) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Message message;
+                if (which) {
+                    message = music_handle.obtainMessage(0x002, getContext());
+                } else {
+                    message = music_handle.obtainMessage(0x003, getContext());
+                }
+                message.sendToTarget();
+            }
+        }).start();
     }
 
     public void restart() {

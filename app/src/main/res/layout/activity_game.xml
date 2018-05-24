@@ -2,14 +2,13 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-    <com.xc161.my2048.my2048
+    <com.xc161.Android_2048_app.my2048
         android:id="@+id/gameview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_centerInParent="true"
         android:background="#ffffff"
-        android:padding="10dp" >
-    </com.xc161.my2048.my2048>
+        android:padding="10dp"></com.xc161.Android_2048_app.my2048>
 
     <LinearLayout
         android:layout_width="wrap_content"

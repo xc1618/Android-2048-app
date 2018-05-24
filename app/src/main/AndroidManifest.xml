@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.xc161.my2048">
+    package="com.xc161.Android_2048_app">
 
     <application
         android:allowBackup="true"

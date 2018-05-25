@@ -57,7 +57,7 @@ public class GameActivity extends AppCompatActivity implements my2048.OnGameList
 
     @Override
     public void OnGameOver() {
-        if (sharedPreferences.getInt("max", 0) < Integer.valueOf(scoreview.getText().toString())) {
+        if (sharedPreferences.getInt("max", 0) < Integer.valueOf(scoreview.getText().toString().substring(6))) {
             editor.putInt("max", Integer.valueOf(scoreview.getText().toString()));
             editor.commit();
         }
